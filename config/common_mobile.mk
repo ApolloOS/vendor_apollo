@@ -1,5 +1,5 @@
-# Inherit common mobile Voltage stuff
-$(call inherit-product, vendor/voltage/config/common.mk)
+# Inherit common mobile Apollo stuff
+$(call inherit-product, vendor/apollo/config/common.mk)
 
 # AOSP packages
 PRODUCT_PACKAGES += \

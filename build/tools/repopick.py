@@ -153,12 +153,12 @@ def fetch_query(remote_url, query):
 
 
 if __name__ == '__main__':
-    # Default to VoltageOS Gerrit
-    default_gerrit = 'https://review.voltageos.org'
+    # Default to ApolloOS Gerrit
+    default_gerrit = 'https://review.ApolloOS.org'
 
     parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description=textwrap.dedent('''\
         repopick.py is a utility to simplify the process of cherry picking
-        patches from VoltageOS's Gerrit instance (or any gerrit instance of your choosing)
+        patches from ApolloOS's Gerrit instance (or any gerrit instance of your choosing)
 
         Given a list of change numbers, repopick will cd into the project path
         and cherry pick the latest patch available.

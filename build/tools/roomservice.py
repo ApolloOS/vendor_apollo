@@ -29,14 +29,14 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-custom_local_manifest = ".repo/local_manifests/voltage.xml"
+custom_local_manifest = ".repo/local_manifests/apollo.xml"
 custom_default_revision = "13"
-custom_dependencies = "voltage.dependencies"
-org_manifest = "VoltageOS-Devices"  # leave empty if org is provided in manifest
-org_display = "VoltageOS-Devices"  # needed for displaying
+custom_dependencies = "apollo.dependencies"
+org_manifest = "ApolloOS-Devices"  # leave empty if org is provided in manifest
+org_display = "ApolloOS-Devices"  # needed for displaying
 
 default_manifest = ".repo/manifests/default.xml"
-voltage_manifest = ".repo/manifests/snippets/voltage.xml"
+voltage_manifest = ".repo/manifests/snippets/apollo.xml"
 lineage_manifest = ".repo/manifests/snippets/external.xml"
 
 github_token = None
@@ -138,7 +138,7 @@ def is_in_manifest(project_path):
 def add_to_manifest(repos, fallback_branch=None):
     lm = load_manifest(custom_local_manifest)
     mlm = load_manifest(default_manifest)
-    voltagem = load_manifest(voltage_manifest)
+    apollom = load_manifest(apollo_manifest)
     lineagem = load_manifest(lineage_manifest)
 
     for repo in repos:
@@ -170,8 +170,8 @@ def add_to_manifest(repos, fallback_branch=None):
             continue
 
         existing_m_project = None
-        if exists_in_tree(voltagem, repo_path) != None:
-            existing_m_project = exists_in_tree(voltagem, repo_path)
+        if exists_in_tree(apollom, repo_path) != None:
+            existing_m_project = exists_in_tree(apollom, repo_path)
         elif exists_in_tree(lineagem, repo_path) != None:
             existing_m_project = exists_in_tree(lineagem, repo_path)
         elif exists_in_tree(mlm, repo_path) != None:

@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := vendor/voltage/fonts
+LOCAL_PATH := vendor/apollo/fonts
 
 # Copy font files
-include vendor/voltage/fonts/font_files.mk
--include vendor/voltage/fonts/extra/extra.mk
+include vendor/apollo/fonts/font_files.mk
+-include vendor/apollo/fonts/extra/extra.mk
 
 # Register custom fonts
 PRODUCT_COPY_FILES += \

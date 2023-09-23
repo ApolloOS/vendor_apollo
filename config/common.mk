@@ -1,7 +1,7 @@
 # Allow vendor/extra to override any property by setting it first
 $(call inherit-product-if-exists, vendor/extra/product.mk)
 
-PRODUCT_BRAND ?= VoltageOS
+PRODUCT_BRAND ?= ApolloOS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -47,15 +47,15 @@ endif
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/voltage/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/voltage/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/voltage/prebuilt/common/bin/50-voltage.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-voltage.sh
+    vendor/apollo/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/apollo/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/apollo/prebuilt/common/bin/50-apollo.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-apollo.sh
 
 ifneq ($(strip $(AB_OTA_PARTITIONS) $(AB_OTA_POSTINSTALL_CONFIG)),)
 PRODUCT_COPY_FILES += \
-    vendor/voltage/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
-    vendor/voltage/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
-    vendor/voltage/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
+    vendor/apollo/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
+    vendor/apollo/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
+    vendor/apollo/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
 ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.ota.allow_downgrade=true
@@ -64,23 +64,23 @@ endif
 
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/voltage/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
+    vendor/apollo/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
 # Pixel sysconfig from Pixel XL (Photos)
 PRODUCT_COPY_FILES += \
-    vendor/voltage/prebuilt/common/etc/sysconfig/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml \
+    vendor/apollo/prebuilt/common/etc/sysconfig/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml \
 
 # Copy all VOLTAGE-specific init rc files
-$(foreach f,$(wildcard vendor/voltage/prebuilt/common/etc/init/*.rc),\
+$(foreach f,$(wildcard vendor/apollo/prebuilt/common/etc/init/*.rc),\
 	$(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
 
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
-    vendor/voltage/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
+    vendor/apollo/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
 
 # Privapp permissions
 PRODUCT_COPY_FILES += \
-    vendor/voltage/config/permissions/privapp-permissions-custom.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-custom.xml
+    vendor/apollo/config/permissions/privapp-permissions-custom.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-custom.xml
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -88,7 +88,7 @@ PRODUCT_COPY_FILES += \
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
-    vendor/voltage/prebuilt/google/etc/permissions/privapp-permissions-googleapps-turbo.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-googleapps-turbo.xml
+    vendor/apollo/prebuilt/google/etc/permissions/privapp-permissions-googleapps-turbo.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-googleapps-turbo.xml
 
 # Enable wireless Xbox 360 controller support
 PRODUCT_COPY_FILES += \
@@ -177,10 +177,10 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.systemuicompilerfilter=speed
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
--include vendor/voltage/config/partner_gms.mk
+-include vendor/apollo/config/partner_gms.mk
 
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/voltage/overlay
-DEVICE_PACKAGE_OVERLAYS += vendor/voltage/overlay/common
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/apollo/overlay
+DEVICE_PACKAGE_OVERLAYS += vendor/apollo/overlay/common
 
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
@@ -201,22 +201,22 @@ PRODUCT_PACKAGES += \
     AndroidEspressoTheme
 
 # RRO
-include vendor/voltage/config/rro_overlays.mk
+include vendor/apollo/config/rro_overlays.mk
 
 # Versioning
-include vendor/voltage/config/version.mk
+include vendor/apollo/config/version.mk
 
 # BootAnimation
-include vendor/voltage/config/bootanimation.mk
+include vendor/apollo/config/bootanimation.mk
 
 # Fonts
-$(call inherit-product, vendor/voltage/fonts/fonts.mk)
+$(call inherit-product, vendor/apollo/fonts/fonts.mk)
 
 # Audio
-$(call inherit-product, vendor/voltage/audio/audio.mk)
+$(call inherit-product, vendor/apollo/audio/audio.mk)
 
 # # Icon packs
-$(call inherit-product, vendor/voltage/themes/icon_packs/icon_packs.mk)
+$(call inherit-product, vendor/apollo/themes/icon_packs/icon_packs.mk)
 
 # Include extra packages
-include vendor/voltage/config/packages.mk
+include vendor/apollo/config/packages.mk

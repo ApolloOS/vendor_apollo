@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := vendor/voltage/fonts
+LOCAL_PATH := vendor/apollo/fonts
 
 # We have to use PRODUCT_PACKAGES (together with BUILD_PREBUILT) instead of
 # PRODUCT_COPY_FILES to install the font files, so that the NOTICE file can

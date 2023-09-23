@@ -1,4 +1,4 @@
-# VoltageOS packages
+# ApolloOS packages
 PRODUCT_PACKAGES += \
     Covers \
     Terminal \
@@ -13,7 +13,7 @@ PRODUCT_PACKAGES += \
     SetupWizard \
     Seedvault
 
-ifeq ($(VOLTAGE_BUILD_TYPE), OFFICIAL)
+ifeq ($(APOLLO_BUILD_TYPE), OFFICIAL)
     PRODUCT_PACKAGES += \
 	Updater
 endif
@@ -42,14 +42,14 @@ endif
 PRODUCT_PACKAGES += \
     BtHelper
 
-# VoltageOS UDFPS icon animations
+# ApolloOS UDFPS icon animations
 EXTRA_UDFPS_ANIMATIONS ?= false
 ifeq ($(EXTRA_UDFPS_ANIMATIONS),true)
 PRODUCT_PACKAGES += \
     UdfpsResources
 endif
 
-# Extra tools in Voltage
+# Extra tools in Apollo
 PRODUCT_PACKAGES += \
     7z \
     awk \

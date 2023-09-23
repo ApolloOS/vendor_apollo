@@ -6,12 +6,12 @@ import (
 	"android/soong/android"
 )
 
-func voltageExpandVariables(ctx android.ModuleContext, in string) string {
-	voltageVars := ctx.Config().VendorConfig("voltageVarsPlugin")
+func apolloExpandVariables(ctx android.ModuleContext, in string) string {
+	apolloVars := ctx.Config().VendorConfig("apolloVarsPlugin")
 
 	out, err := android.Expand(in, func(name string) (string, error) {
-		if voltageVars.IsSet(name) {
-			return voltageVars.String(name), nil
+		if apolloVars.IsSet(name) {
+			return apolloVars.String(name), nil
 		}
 		// This variable is not for us, restore what the original
 		// variable string will have looked like for an Expand

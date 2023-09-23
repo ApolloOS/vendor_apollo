@@ -14,8 +14,8 @@
 
 $(call inherit-product, build/target/product/aosp_arm64_ab.mk)
 
-include vendor/voltage/build/target/product/voltage_generic_target.mk
+include vendor/apollo/build/target/product/apollo_generic_target.mk
 
 TARGET_NO_KERNEL_OVERRIDE := true
 
-PRODUCT_NAME := voltage_arm64_ab
+PRODUCT_NAME := apollo_arm64_ab
