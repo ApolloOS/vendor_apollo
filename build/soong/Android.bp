@@ -1,4 +1,4 @@
-// Bliss soong configs
+// Apollo soong configs
 
 bootstrap_go_package {
     name: "soong-apollo-generator",

@@ -1,4 +1,4 @@
 #
-# Bliss-specific variable clears
+# Apollo-specific variable clears
 #
 LOCAL_IGNORE_SUBDIR :=

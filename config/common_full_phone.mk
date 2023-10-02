@@ -1,4 +1,4 @@
-# Inherit full common Bliss stuff
+# Inherit full common Apollo stuff
 $(call inherit-product, vendor/apollo/config/common_full.mk)
 
 # Required packages

@@ -1,4 +1,4 @@
-# Inherit common Bliss stuff
+# Inherit common Apollo stuff
 $(call inherit-product, vendor/apollo/config/common_mobile.mk)
 
 PRODUCT_SIZE := full

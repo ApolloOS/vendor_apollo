@@ -1,7 +1,7 @@
 # Allow vendor/extra to override any property by setting it first
 $(call inherit-product-if-exists, vendor/extra/product.mk)
 
-PRODUCT_BRAND ?= Bliss
+PRODUCT_BRAND ?= Apollo
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -53,7 +53,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/apollo/config/permissions/privapp-permissions-apollo-system_ext.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-apollo-system_ext.xml \
 
-# Bliss-specific init rc file
+# Apollo-specific init rc file
 PRODUCT_COPY_FILES += \
     vendor/apollo/prebuilt/common/etc/init/init.apollo-system_ext.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.apollo-system_ext.rc \
     vendor/apollo/prebuilt/common/etc/init/init.apollo-updater.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.apollo-updater.rc \
@@ -98,7 +98,7 @@ endif
 # Include AOSP audio files
 include vendor/apollo/config/aosp_audio.mk
 
-# Include Bliss audio files
+# Include Apollo audio files
 include vendor/apollo/config/apollo_audio.mk
 
 ifneq ($(TARGET_DISABLE_LINEAGE_SDK), true)
@@ -167,19 +167,19 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/apollo/config/permissions/privapp-permissions-omadm.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-omadm.xml
 
-# Bliss Bootanimation
+# Apollo Bootanimation
 -include vendor/apollo/config/bootanimation.mk
 
-# Bliss Versioning System
+# Apollo Versioning System
 -include vendor/apollo/config/versions.mk
 
-# Bliss Packages
+# Apollo Packages
 -include vendor/apollo/config/apollo_packages.mk
 
-# Bliss Prebuilts
+# Apollo Prebuilts
 -include vendor/prebuilts/apollo_prebuilts.mk
 
-# Bliss Overlays
+# Apollo Overlays
 -include vendor/overlays/apollo_overlays.mk
 
 # Gapps

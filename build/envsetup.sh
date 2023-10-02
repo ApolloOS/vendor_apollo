@@ -1,16 +1,16 @@
 function __print_apollo_functions_help() {
 cat <<EOF
-Additional BlissRoms functions:
+Additional Apollo functions:
 - cout:            Changes directory to out.
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
-- apollogerrit:   A Git wrapper that fetches/pushes patch from/to BlissRoms Gerrit Review.
+- apollogerrit:   A Git wrapper that fetches/pushes patch from/to Apollo Gerrit Review.
 - apollorebase:   Rebase a Gerrit change and push it again.
-- apolloremote:   Add git remote for BlissRoms Gerrit Review.
+- apolloremote:   Add git remote for Apollo Gerrit Review.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
-- githubremote:    Add git remote for BlissRoms Github.
+- githubremote:    Add git remote for Apollo Github.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
 - cmka:            Cleans and builds using mka.
@@ -69,7 +69,7 @@ function breakfast()
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the BlissRoms model name
+            # This is probably just the Apollo model name
             if [ -z "$variant" ]; then
                 variant="userdebug"
             fi

@@ -1,4 +1,4 @@
-# BlissRoms core functionality
+# Apollo core functionality
 on init
     export TERMINFO /system_ext/etc/terminfo
 

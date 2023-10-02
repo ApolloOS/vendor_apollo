@@ -2,11 +2,11 @@
 PRODUCT_PACKAGES += \
     apns-conf.xml
 
-# Bliss Packages
+# Apollo Packages
 PRODUCT_PACKAGES += \
     Aperture \
-    BlissUpdater \
-    BlissSystemUI \
+    ApolloUpdater \
+    ApolloSystemUI \
     Contacts \
     Covers \
     DeskClock \

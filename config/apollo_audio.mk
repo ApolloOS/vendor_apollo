@@ -1,5 +1,5 @@
 #
-# Bliss Audio Files
+# Apollo Audio Files
 #
 
 ALARM_PATH := vendor/apollo/prebuilt/common/media/audio/alarms
