@@ -1,5 +1,5 @@
 [gerrit]
-host=review.blissroms.org
+host=review.apolloroms.org
 port=29418
-project=platform_vendor_bliss
+project=platform_vendor_apollo
 defaultbranch=r

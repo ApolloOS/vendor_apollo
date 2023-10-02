@@ -5,12 +5,12 @@ ADDITIONAL_SYSTEM_PROPERTIES += \
 endif
 
 ADDITIONAL_SYSTEM_PROPERTIES += \
-  ro.bliss.codename=$(BLISS_CODENAME) \
-  ro.bliss.version=$(BLISS_VERSION) \
-  ro.bliss.build.status=$(BLISS_BUILDTYPE) \
-  ro.bliss.changelog.version=Changelog-$(BLISS_VERSION) \
-  ro.bliss.fingerprint=$(BLISS_FINGERPRINT) \
-  ro.bliss.static.version=$(BLISS_VERSION_STATIC) \
-  ro.bliss.build.variant=$(BLISS_BUILD_VARIANT) \
-  ro.bliss.build.timestamp=$(BLISS_BUILD_TIMESTAMP) \
-  ro.bliss.build=$(BLISS_BUILD_ZIP)
+  ro.apollo.codename=$(APOLLO_CODENAME) \
+  ro.apollo.version=$(APOLLO_VERSION) \
+  ro.apollo.build.status=$(APOLLO_BUILDTYPE) \
+  ro.apollo.changelog.version=Changelog-$(APOLLO_VERSION) \
+  ro.apollo.fingerprint=$(APOLLO_FINGERPRINT) \
+  ro.apollo.static.version=$(APOLLO_VERSION_STATIC) \
+  ro.apollo.build.variant=$(APOLLO_BUILD_VARIANT) \
+  ro.apollo.build.timestamp=$(APOLLO_BUILD_TIMESTAMP) \
+  ro.apollo.build=$(APOLLO_BUILD_ZIP)

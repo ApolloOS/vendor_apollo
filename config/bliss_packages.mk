@@ -36,7 +36,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
 
-# Extra tools in bliss
+# Extra tools in apollo
 PRODUCT_PACKAGES += \
     7z \
     awk \

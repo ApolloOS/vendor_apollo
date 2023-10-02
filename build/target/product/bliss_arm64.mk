@@ -14,8 +14,8 @@
 
 $(call inherit-product, build/target/product/aosp_arm64.mk)
 
-include vendor/bliss/build/target/product/bliss_generic_target.mk
+include vendor/apollo/build/target/product/apollo_generic_target.mk
 
 TARGET_NO_KERNEL_OVERRIDE := true
 
-PRODUCT_NAME := bliss_arm64
+PRODUCT_NAME := apollo_arm64

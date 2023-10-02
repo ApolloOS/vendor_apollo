@@ -1,8 +1,8 @@
 // Bliss soong configs
 
 bootstrap_go_package {
-    name: "soong-bliss-generator",
-    pkgPath: "bliss/soong/generator",
+    name: "soong-apollo-generator",
+    pkgPath: "apollo/soong/generator",
     deps: [
         "blueprint",
         "blueprint-pathtools",
@@ -17,7 +17,7 @@ bootstrap_go_package {
     pluginFor: ["soong_build"],
 }
 
-bliss_generator {
+apollo_generator {
     name: "generated_kernel_includes",
 
     // The headers make command
@@ -54,7 +54,7 @@ cc_library_headers {
 soong_config_module_type {
     name: "aapt_version_code",
     module_type: "java_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["aapt_version_code"],
     properties: ["aaptflags"],
 }
@@ -74,7 +74,7 @@ aapt_version_code {
 soong_config_module_type {
     name: "gralloc_10_usage_bits",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["additional_gralloc_10_usage_bits"],
     properties: ["cppflags"],
 }
@@ -91,7 +91,7 @@ gralloc_10_usage_bits {
 soong_config_module_type {
     name: "gralloc_handle_custom_content_md_reserved_size",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["gralloc_handle_has_custom_content_md_reserved_size"],
     properties: ["export_cflags"],
 }
@@ -108,7 +108,7 @@ gralloc_handle_custom_content_md_reserved_size {
 soong_config_module_type {
     name: "gralloc_handle_reserved_size",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["gralloc_handle_has_reserved_size"],
     properties: ["export_cflags"],
 }
@@ -125,7 +125,7 @@ gralloc_handle_reserved_size {
 soong_config_module_type {
     name: "target_shim_libs",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["target_ld_shim_libs"],
     properties: ["cppflags"],
 }
@@ -142,7 +142,7 @@ target_shim_libs {
 soong_config_module_type {
     name: "vendor_init",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["target_init_vendor_lib"],
     properties: ["whole_static_libs"],
 }
@@ -159,7 +159,7 @@ vendor_init {
 soong_config_module_type {
     name: "surfaceflinger_udfps_lib",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["target_surfaceflinger_udfps_lib"],
     properties: [
         "cppflags",
@@ -180,7 +180,7 @@ surfaceflinger_udfps_lib {
 soong_config_module_type {
     name: "needs_camera_boottime",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["needs_camera_boottime"],
     properties: ["cppflags"],
 }
@@ -197,7 +197,7 @@ needs_camera_boottime {
 soong_config_module_type {
     name: "camera_needs_client_info",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["camera_needs_client_info"],
     properties: ["cppflags"],
 }
@@ -214,7 +214,7 @@ camera_needs_client_info {
 soong_config_module_type {
     name: "camera_needs_client_info_lib",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["camera_needs_client_info_lib"],
     properties: [
         "cppflags",
@@ -235,7 +235,7 @@ camera_needs_client_info_lib {
 soong_config_module_type {
     name: "camera_needs_client_info_lib_oplus",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["camera_needs_client_info_lib_oplus"],
     properties: [
         "cppflags",
@@ -256,7 +256,7 @@ camera_needs_client_info_lib_oplus {
 soong_config_module_type {
     name: "bootloader_message_offset",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["bootloader_message_offset"],
     properties: [
         "cflags",
@@ -277,7 +277,7 @@ bootloader_message_offset {
 soong_config_module_type {
     name: "egl_display_array",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["uses_egl_display_array"],
     properties: ["cflags"],
 }
@@ -295,7 +295,7 @@ egl_display_array {
 soong_config_module_type {
     name: "nvidia_enhancements",
     module_type: "cc_defaults",
-    config_namespace: "blissNvidiaVars",
+    config_namespace: "apolloNvidiaVars",
     bool_variables: ["uses_nvidia_enhancements"],
     properties: ["cppflags"],
 }
@@ -313,7 +313,7 @@ nvidia_enhancements {
 soong_config_module_type {
     name: "librmnetctl_pre_uplink",
     module_type: "cc_defaults",
-    config_namespace: "blissQcomVars",
+    config_namespace: "apolloQcomVars",
     bool_variables: ["uses_pre_uplink_features_netmgrd"],
     properties: ["cflags"],
 }
@@ -330,7 +330,7 @@ librmnetctl_pre_uplink {
 soong_config_module_type {
     name: "qti_camera_device",
     module_type: "cc_defaults",
-    config_namespace: "blissQcomVars",
+    config_namespace: "apolloQcomVars",
     bool_variables: ["uses_qti_camera_device"],
     properties: [
         "cppflags",
@@ -351,7 +351,7 @@ qti_camera_device {
 soong_config_module_type {
     name: "qti_usb_hal_supported_modes",
     module_type: "cc_defaults",
-    config_namespace: "blissQcomVars",
+    config_namespace: "apolloQcomVars",
     bool_variables: ["supports_audio_accessory", "supports_debug_accessory"],
     properties: [
         "cppflags",
@@ -373,7 +373,7 @@ qti_usb_hal_supported_modes {
 soong_config_module_type {
     name: "extended_compress_format",
     module_type: "cc_defaults",
-    config_namespace: "blissQcomVars",
+    config_namespace: "apolloQcomVars",
     bool_variables: ["supports_extended_compress_format"],
     properties: ["cflags"],
 }
@@ -390,7 +390,7 @@ extended_compress_format {
 soong_config_module_type {
     name: "surfaceflinger_qcom_extensions",
     module_type: "cc_defaults",
-    config_namespace: "blissQcomVars",
+    config_namespace: "apolloQcomVars",
     value_variables: ["qcom_display_headers_namespace"],
     properties: [
         "cppflags",
@@ -411,7 +411,7 @@ surfaceflinger_qcom_extensions {
 soong_config_module_type {
     name: "inputdispatcher_skip_event_key",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     value_variables: ["target_inputdispatcher_skip_event_key"],
     properties: ["cppflags"],
 }
@@ -428,7 +428,7 @@ inputdispatcher_skip_event_key {
 soong_config_module_type {
     name: "uses_oplus_camera",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["uses_oplus_camera"],
     properties: ["cppflags"],
 }
@@ -445,7 +445,7 @@ uses_oplus_camera {
 soong_config_module_type {
     name: "uses_nothing_camera",
     module_type: "cc_defaults",
-    config_namespace: "blissGlobalVars",
+    config_namespace: "apolloGlobalVars",
     bool_variables: ["uses_nothing_camera"],
     properties: ["cppflags"],
 }

@@ -44,7 +44,7 @@ DEBUG = False
 
 custom_local_manifest = ".repo/local_manifests/roomservice.xml"
 custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'typhoon')
-custom_dependencies = "bliss.dependencies"
+custom_dependencies = "apollo.dependencies"
 org_manifest = "BlissRoms-Devices"  # leave empty if org is provided in manifest
 org_display = "BlissRoms-Devices"  # needed for displaying
 

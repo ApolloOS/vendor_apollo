@@ -1,5 +1,5 @@
 # Inherit common mobile Bliss stuff
-$(call inherit-product, vendor/bliss/config/common.mk)
+$(call inherit-product, vendor/apollo/config/common.mk)
 
 # Default notification/alarm sounds
 PRODUCT_PRODUCT_PROPERTIES += \

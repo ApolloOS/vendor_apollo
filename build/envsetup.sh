@@ -1,13 +1,13 @@
-function __print_bliss_functions_help() {
+function __print_apollo_functions_help() {
 cat <<EOF
 Additional BlissRoms functions:
 - cout:            Changes directory to out.
 - mmp:             Builds all of the modules in the current directory and pushes them to the device.
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
-- blissgerrit:   A Git wrapper that fetches/pushes patch from/to BlissRoms Gerrit Review.
-- blissrebase:   Rebase a Gerrit change and push it again.
-- blissremote:   Add git remote for BlissRoms Gerrit Review.
+- apollogerrit:   A Git wrapper that fetches/pushes patch from/to BlissRoms Gerrit Review.
+- apollorebase:   Rebase a Gerrit change and push it again.
+- apolloremote:   Add git remote for BlissRoms Gerrit Review.
 - aospremote:      Add git remote for matching AOSP repository.
 - cafremote:       Add git remote for matching CodeAurora repository.
 - githubremote:    Add git remote for BlissRoms Github.
@@ -21,8 +21,8 @@ Additional BlissRoms functions:
 - sort-blobs-list: Sort proprietary-files.txt sections with LC_ALL=C.
 - installboot:     Installs a boot.img to the connected device.
 - installrecovery: Installs a recovery.img to the connected device.
-- blissify:        Sets up build environment using breakfast(),
-                   and then compiles using mka() against blissify target.
+- apolloify:        Sets up build environment using breakfast(),
+                   and then compiles using mka() against apolloify target.
 EOF
 }
 
@@ -74,7 +74,7 @@ function breakfast()
                 variant="userdebug"
             fi
 
-            lunch bliss_$target-$variant
+            lunch apollo_$target-$variant
         fi
     fi
     return $?
@@ -85,7 +85,7 @@ alias bib=breakfast
 function eat()
 {
     if [ "$OUT" ] ; then
-        ZIPPATH=`ls -tr "$OUT"/Bliss-*.zip | tail -1`
+        ZIPPATH=`ls -tr "$OUT"/Apollo-*.zip | tail -1`
         if [ ! -f $ZIPPATH ] ; then
             echo "Nothing to eat"
             return 1
@@ -93,13 +93,13 @@ function eat()
         echo "Waiting for device..."
         adb wait-for-device-recovery
         echo "Found device"
-        if (adb shell getprop ro.bliss.device | grep -q "$BLISS_BUILD"); then
+        if (adb shell getprop ro.apollo.device | grep -q "$APOLLO_BUILD"); then
             echo "Rebooting to sideload for install"
             adb reboot sideload-auto-reboot
             adb wait-for-sideload
             adb sideload $ZIPPATH
         else
-            echo "The connected device does not appear to be $BLISS_BUILD, run away!"
+            echo "The connected device does not appear to be $APOLLO_BUILD, run away!"
         fi
         return $?
     else
@@ -110,7 +110,7 @@ function eat()
 
 function omnom()
 {
-    blissify $*
+    apolloify $*
     eat
 }
 
@@ -223,43 +223,43 @@ function dddclient()
    fi
 }
 
-function blissremote()
+function apolloremote()
 {
     if ! git rev-parse --git-dir &> /dev/null
     then
         echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
         return 1
     fi
-    git remote rm bliss 2> /dev/null
+    git remote rm apollo 2> /dev/null
     local REMOTE=$(git config --get remote.github.projectname)
-    local BLISS="true"
+    local APOLLO="true"
     if [ -z "$REMOTE" ]
     then
         REMOTE=$(git config --get remote.aosp.projectname)
-        BLISS="false"
+        APOLLO="false"
     fi
     if [ -z "$REMOTE" ]
     then
         REMOTE=$(git config --get remote.caf.projectname)
-        BLISS="false"
+        APOLLO="false"
     fi
 
-    if [ $BLISS = "false" ]
+    if [ $APOLLO = "false" ]
     then
         local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
-        local PFX="BLISS/"
+        local PFX="APOLLO/"
     else
         local PROJECT=$REMOTE
     fi
 
-    local BLISS_USER=$(git config --get review.review.blissroms.com.username)
-    if [ -z "$BLISS_USER" ]
+    local APOLLO_USER=$(git config --get review.review.apolloroms.com.username)
+    if [ -z "$APOLLO_USER" ]
     then
-        git remote add bliss ssh://review.blissroms.com:29418/$PFX$PROJECT
+        git remote add apollo ssh://review.apolloroms.com:29418/$PFX$PROJECT
     else
-        git remote add bliss ssh://$BLISS_USER@review.blissroms.com:29418/$PFX$PROJECT
+        git remote add apollo ssh://$APOLLO_USER@review.apolloroms.com:29418/$PFX$PROJECT
     fi
-    echo "Remote 'bliss' created"
+    echo "Remote 'apollo' created"
 }
 
 function aospremote()
@@ -358,14 +358,14 @@ function installboot()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop ro.bliss.device | grep -q "$BLISS_BUILD");
+    if (adb shell getprop ro.apollo.device | grep -q "$APOLLO_BUILD");
     then
         adb push $OUT/boot.img /cache/
         adb shell dd if=/cache/boot.img of=$PARTITION
         adb shell rm -rf /cache/boot.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $BLISS_BUILD, run away!"
+        echo "The connected device does not appear to be $APOLLO_BUILD, run away!"
     fi
 }
 
@@ -396,14 +396,14 @@ function installrecovery()
     adb wait-for-device-recovery
     adb root
     adb wait-for-device-recovery
-    if (adb shell getprop ro.bliss.device | grep -q "$BLISS_BUILD");
+    if (adb shell getprop ro.apollo.device | grep -q "$APOLLO_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         adb shell rm -rf /cache/recovery.img
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $BLISS_BUILD, run away!"
+        echo "The connected device does not appear to be $APOLLO_BUILD, run away!"
     fi
 }
 
@@ -423,13 +423,13 @@ function makerecipe() {
     if [ "$REPO_REMOTE" = "github" ]
     then
         pwd
-        blissremote
-        git push bliss HEAD:refs/heads/'$1'
+        apolloremote
+        git push apollo HEAD:refs/heads/'$1'
     fi
     '
 }
 
-function blissgerrit() {
+function apollogerrit() {
     if [ "$(__detect_shell)" = "zsh" ]; then
         # zsh does not define FUNCNAME, derive from funcstack
         local FUNCNAME=$funcstack[1]
@@ -439,7 +439,7 @@ function blissgerrit() {
         $FUNCNAME help
         return 1
     fi
-    local user=`git config --get review.review.blissroms.com.username`
+    local user=`git config --get review.review.apolloroms.com.username`
     local review=`git config --get remote.github.review`
     local project=`git config --get remote.github.projectname`
     local command=$1
@@ -475,7 +475,7 @@ EOF
             case $1 in
                 __cmg_*) echo "For internal use only." ;;
                 changes|for)
-                    if [ "$FUNCNAME" = "blissgerrit" ]; then
+                    if [ "$FUNCNAME" = "apollogerrit" ]; then
                         echo "'$FUNCNAME $1' is deprecated."
                     fi
                     ;;
@@ -568,7 +568,7 @@ EOF
                 $local_branch:refs/for/$remote_branch || return 1
             ;;
         changes|for)
-            if [ "$FUNCNAME" = "blissgerrit" ]; then
+            if [ "$FUNCNAME" = "apollogerrit" ]; then
                 echo >&2 "'$FUNCNAME $command' is deprecated."
             fi
             ;;
@@ -667,7 +667,7 @@ EOF
     esac
 }
 
-function blissrebase() {
+function apollorebase() {
     local repo=$1
     local refs=$2
     local pwd="$(pwd)"
@@ -675,7 +675,7 @@ function blissrebase() {
 
     if [ -z $repo ] || [ -z $refs ]; then
         echo "LineageOS Gerrit Rebase Usage: "
-        echo "      blissrebase <path to project> <patch IDs on Gerrit>"
+        echo "      apollorebase <path to project> <patch IDs on Gerrit>"
         echo "      The patch IDs appear on the Gerrit commands that are offered."
         echo "      They consist on a series of numbers and slashes, after the text"
         echo "      refs/changes. For example, the ID in the following command is 26/8126/2"
@@ -696,7 +696,7 @@ function blissrebase() {
     echo "Bringing it up to date..."
     repo sync .
     echo "Fetching change..."
-    git fetch "https://review.blissroms.com/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
+    git fetch "https://review.apolloroms.com/p/$repo" "refs/changes/$refs" && git cherry-pick FETCH_HEAD
     if [ "$?" != "0" ]; then
         echo "Error cherry-picking. Not uploading!"
         return
@@ -780,7 +780,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell getprop ro.bliss.device | grep -q "$BLISS_BUILD") || [ "$FORCE_PUSH" = "true" ];
+    if (adb shell getprop ro.apollo.device | grep -q "$APOLLO_BUILD") || [ "$FORCE_PUSH" = "true" ];
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices \
@@ -899,7 +899,7 @@ EOF
     rm -f $OUT/.log
     return 0
     else
-        echo "The connected device does not appear to be $BLISS_BUILD, run away!"
+        echo "The connected device does not appear to be $APOLLO_BUILD, run away!"
     fi
 }
 
@@ -912,7 +912,7 @@ alias cmkap='dopush cmka'
 
 function repopick() {
     T=$(gettop)
-    $T/vendor/bliss/build/tools/repopick.py $@
+    $T/vendor/apollo/build/tools/repopick.py $@
 }
 
 function sort-blobs-list() {
@@ -924,7 +924,7 @@ function fixup_common_out_dir() {
     common_out_dir=$(get_build_var OUT_DIR)/target/common
     target_device=$(get_build_var TARGET_DEVICE)
     common_target_out=common-${target_device}
-    if [ ! -z $BLISS_FIXUP_COMMON_OUT ]; then
+    if [ ! -z $APOLLO_FIXUP_COMMON_OUT ]; then
         if [ -d ${common_out_dir} ] && [ ! -L ${common_out_dir} ]; then
             mv ${common_out_dir} ${common_out_dir}-${target_device}
             ln -s ${common_target_out} ${common_out_dir}
@@ -939,13 +939,13 @@ function fixup_common_out_dir() {
     fi
 }
 
-function blissify()
+function apolloify()
 {
 	abt="$ANDROID_BUILD_TOP"
 	cd $abt
 	clean="n"
 	deviceclean="n"
-	export BLISS_BUILD_VARIANT=vanilla
+	export APOLLO_BUILD_VARIANT=vanilla
 	while test $# -gt 0
 	do
 	  case $1 in
@@ -964,7 +964,7 @@ function blissify()
                   echo "         -m | --microg: Build with MicroG added"
 		  echo ""
 		  echo "deviceCodename: "
-		  echo "your device codename, without the 'bliss_' in front"
+		  echo "your device codename, without the 'apollo_' in front"
 		  echo ""
 		  ;;
 		-c | --clean)
@@ -977,33 +977,33 @@ function blissify()
 		  ;;
 		-v | --vanilla)
 		  echo "Building as stock (no gapps) **DEFAULT**"
-		  export BLISS_BUILD_VARIANT=vanilla
+		  export APOLLO_BUILD_VARIANT=vanilla
 		  ;;
 		-g | --gapps)
 		  echo "Building with Minimal Gapps"
-		  export BLISS_BUILD_VARIANT=gapps
+		  export APOLLO_BUILD_VARIANT=gapps
 		  ;;
                 -p | --pixelgapps)
                   echo "Building with Pixel Gapps"
-                  export BLISS_BUILD_VARIANT=pixelgapps
+                  export APOLLO_BUILD_VARIANT=pixelgapps
                   ;;
 		-f | --fossa)
 		  echo "Building with FOSS apps for arm64-v8a support"
-		  export BLISS_BUILD_VARIANT=foss
+		  export APOLLO_BUILD_VARIANT=foss
 		  cd vendor/foss
 		  bash update.sh 2
 		  cd $abt
 		  ;;
 		-F | --fossx)
 		  echo "Building with FOSS apps for x86_64 support"
-		  export BLISS_BUILD_VARIANT=foss
+		  export APOLLO_BUILD_VARIANT=foss
 		  cd vendor/foss
 		  bash update.sh 1
 		  cd $abt
 		  ;;
                 -m | --microg)
                   echo "Building with MicroG"
-                  export BLISS_BUILD_VARIANT=microg
+                  export APOLLO_BUILD_VARIANT=microg
                   ;;
 		-u | --userdebug)
 		  echo "Building userdebug variant"
@@ -1080,7 +1080,7 @@ function blissify()
         fi
 
     if [ $? -eq 0 ]; then
-        mka blissify
+        mka apolloify
     else
         echo "No such item in brunch menu. Try 'breakfast' or verify your product is added to AndroidProducts.mk"
         return 1

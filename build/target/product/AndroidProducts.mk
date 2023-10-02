@@ -15,13 +15,13 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/bliss_arm.mk \
-    $(LOCAL_DIR)/bliss_arm64.mk \
-    $(LOCAL_DIR)/bliss_x86.mk \
-    $(LOCAL_DIR)/bliss_x86_64.mk
+    $(LOCAL_DIR)/apollo_arm.mk \
+    $(LOCAL_DIR)/apollo_arm64.mk \
+    $(LOCAL_DIR)/apollo_x86.mk \
+    $(LOCAL_DIR)/apollo_x86_64.mk
 
 COMMON_LUNCH_CHOICES := \
-    bliss_arm-userdebug \
-    bliss_arm64-userdebug \
-    bliss_x86-userdebug \
-    bliss_x86_64-userdebug
+    apollo_arm-userdebug \
+    apollo_arm64-userdebug \
+    apollo_x86-userdebug \
+    apollo_x86_64-userdebug
