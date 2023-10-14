@@ -184,7 +184,7 @@ PRODUCT_COPY_FILES += \
 
 # Gapps
 ifeq ($(APOLLO_BUILD_VARIANT), gapps)
-$(call inherit-product, vendor/gapps/arm64/arm64-vendor.mk)
+$(call inherit-product, vendor/gapps/products/gapps.mk)
 endif
 
 # PixelGapps
