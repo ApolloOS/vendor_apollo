@@ -7,6 +7,3 @@ endef
 
 # Include board/platform macros
 include vendor/apollo/build/core/utils.mk
-
-# Include vendor platform definitions
-include vendor/apollo/build/core/vendor/*.mk
